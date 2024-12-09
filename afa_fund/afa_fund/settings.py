@@ -25,9 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_random_secret_key()  # Generate a new secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['vercel.com', 'www.vercel.com']  # Replace with your actual domain
+ALLOWED_HOSTS = [ 
+    '127.0.0.1',
+    '.vercel.app',
+    'localhost'
+    ]  # Replace with your actual domain
 
 
 # Application definition
@@ -73,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'afa_fund.wsgi.application'
+WSGI_APPLICATION = 'afa_fund.wsgi.app'
 
 
 # Database
@@ -130,14 +134,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-SECURE_HSTS_SECONDS = 31536000  # Enable HSTS for one year
+# SECURE_HSTS_SECONDS = 31536000  # Enable HSTS for one year
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Enable HSTS for all subdomains
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Enable HSTS for all subdomains
 
-SECURE_HSTS_PRELOAD = True  # Allow your site to be submitted to the browser preload list
+# SECURE_HSTS_PRELOAD = True  # Allow your site to be submitted to the browser preload list
