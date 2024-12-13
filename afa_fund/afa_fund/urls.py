@@ -17,7 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+<<<<<<< HEAD
 from core.views import StockViewSet, MonthlyStockView
+=======
+from core.views import StockViewSet
+>>>>>>> origin/main
 
 router = DefaultRouter()
 router.register(r'stocks', StockViewSet)
@@ -25,5 +29,8 @@ router.register(r'stocks', StockViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+<<<<<<< HEAD
     path('<int:year>/<int:month>/', MonthlyStockView.as_view(), name='monthly_stocks')
+=======
+>>>>>>> origin/main
 ]

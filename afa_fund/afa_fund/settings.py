@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_random_secret_key()  # Generate a new secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 DEBUG = True
 
 ALLOWED_HOSTS = [ 
@@ -32,6 +33,11 @@ ALLOWED_HOSTS = [
     '.vercel.app',
     'localhost'
     ]  # Replace with your actual domain
+=======
+DEBUG = False
+
+ALLOWED_HOSTS = ['vercel.com', 'www.vercel.com']  # Replace with your actual domain
+>>>>>>> origin/main
 
 
 # Application definition
@@ -57,7 +63,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     'core.middleware.RedirectIfNoDataMiddleware',  # Add your middleware here
+=======
+>>>>>>> origin/main
 ]
 
 ROOT_URLCONF = 'afa_fund.urls'
@@ -78,7 +87,11 @@ TEMPLATES = [
     },
 ]
 
+<<<<<<< HEAD
 WSGI_APPLICATION = 'afa_fund.wsgi.app'
+=======
+WSGI_APPLICATION = 'afa_fund.wsgi.application'
+>>>>>>> origin/main
 
 
 # Database
@@ -135,6 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+<<<<<<< HEAD
 # SECURE_HSTS_SECONDS = 31536000  # Enable HSTS for one year
 
 SECURE_SSL_REDIRECT = False # Make True on Production
@@ -146,3 +160,16 @@ CSRF_COOKIE_SECURE = False # Make True on Production
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Enable HSTS for all subdomains
 
 # SECURE_HSTS_PRELOAD = True  # Allow your site to be submitted to the browser preload list
+=======
+SECURE_HSTS_SECONDS = 31536000  # Enable HSTS for one year
+
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Enable HSTS for all subdomains
+
+SECURE_HSTS_PRELOAD = True  # Allow your site to be submitted to the browser preload list
+>>>>>>> origin/main
