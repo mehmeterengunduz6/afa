@@ -1,1 +1,1 @@
-web: gunicorn afa_fund.wsgi:application --log-file -
+web: gunicorn afa_fund.wsgi:application
