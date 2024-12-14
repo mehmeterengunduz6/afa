@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { motion } from 'framer-motion';
 
 const PUBLIC_TOKEN = 'pk_Db8lXWjYSgmuij8XOmk7iw'; // Replace with your actual public token
@@ -11,9 +11,10 @@ const StockModal = ({ stock, onClose }) => {
     // Any additional logic can be added here if needed
   }, [stock]);
 
-  const data = Array.from({ length: 12 }, (_, i) => ({
+  const data = Array.from({ length: 6 }, (_, i) => ({
     month: `Month ${i + 1}`,
     price: Math.floor(Math.random() * 100),
+    price_2: Math.floor(Math.random() * 100)
   }));
 
   return (
@@ -41,10 +42,12 @@ const StockModal = ({ stock, onClose }) => {
         <div className="w-full h-80">
           <ResponsiveContainer>
             <LineChart data={data}>
-              <XAxis dataKey="month" />
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} />
               <YAxis hide={true} />
               <Tooltip />
-              <Line type="monotone" dataKey="price" stroke="#000" strokeWidth={3} />
+              <Line type="monotone" dataKey="price" stroke="#000" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="price_2" stroke="#f56565" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
