@@ -59,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'core.middleware.RedirectIfNoDataMiddleware',  # Add your middleware here
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
+
 ]
 
 ROOT_URLCONF = 'afa_fund.urls'
@@ -151,3 +153,7 @@ CSRF_COOKIE_SECURE = False # Make True on Production
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontendd/build/static'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
