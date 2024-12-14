@@ -1,1 +1,1 @@
-web: gunicorn afa_fund.wsgi
+web: gunicorn afa_fund.wsgi:app
