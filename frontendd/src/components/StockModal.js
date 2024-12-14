@@ -46,8 +46,7 @@ const StockModal = ({ stock, onClose }) => {
               <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} />
               <YAxis hide={true} />
               <Tooltip />
-              <Line type="monotone" dataKey="price" stroke="#000" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="price_2" stroke="#f56565" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="price" stroke="#000" strokeWidth={3} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
