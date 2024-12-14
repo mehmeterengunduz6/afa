@@ -129,6 +129,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '../frontendd/build/static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -150,10 +159,6 @@ CSRF_COOKIE_SECURE = False # Make True on Production
 
 # SECURE_HSTS_PRELOAD = True  # Allow your site to be submitted to the browser preload list
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontendd/build/static'),
-]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
