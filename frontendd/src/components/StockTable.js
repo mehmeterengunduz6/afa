@@ -27,7 +27,8 @@ export function StockTable({ year, month }) {
           window.location.href = response.url;
         } else {
           const data = await response.json();
-          setCurrentStocks(data);
+          const filteredData = data.filter(stock => stock.is_AFA === true);
+          setCurrentStocks(filteredData);
         }
       } catch (error) {
         console.error('Error fetching stocks:', error);
