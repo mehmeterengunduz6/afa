@@ -45,9 +45,9 @@ const StockModal = ({ stock, onClose }) => {
         <div className="flex items-center space-x-4 mb-4">
           <img
             src={`https://img.logo.dev/ticker/${stock.symbol.toLowerCase()}?token=${PUBLIC_TOKEN}`}
-          alt={`${stock.name} logo`}
-          className="w-10 h-10 rounded-full"
-          onError={(e) => { e.target.onerror = null; e.target.src = DEFAULT_FLAG_URL; }}
+            alt={`${stock.name} logo`}
+            className="w-10 h-10 rounded-full"
+            onError={(e) => { e.target.onerror = null; e.target.src = DEFAULT_FLAG_URL; }}
           />
           <div>
             <h2 className="text-2xl font-bold text-gray-900">{stock.symbol}</h2>
@@ -62,7 +62,7 @@ const StockModal = ({ stock, onClose }) => {
                 const options = { month: 'short', year: 'numeric' }
                 return new Date(date).toLocaleDateString(undefined, options)
               }} />
-              <YAxis hide={true} />
+              <YAxis hide={true} type='number' domain={[dataMin => (dataMin*0.9), dataMax => (dataMax*1.1)]} />
               <Tooltip />
               <Line type="monotone" dataKey="weight" stroke="#f56565" strokeWidth={3} dot={false} />
             </LineChart>
