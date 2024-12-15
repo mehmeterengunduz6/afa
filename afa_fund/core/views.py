@@ -17,3 +17,13 @@ class MonthlyStockView(View):
         
         return JsonResponse(stock_data, safe=False)
     
+class StockDetailView(View):
+    def get(self, request, symbol):
+        stock_data = Stock.objects.filter(symbol=symbol).order_by('date')
+        if not stock_data.exists():
+            return JsonResponse({'error': 'Stock not found'}, status=404)
+        
+        serialized_data = StockSerializer(stock_data, many=True).data
+        return JsonResponse(serialized_data, safe=False)
+        
+    

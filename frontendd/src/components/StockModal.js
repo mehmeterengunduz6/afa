@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { motion } from 'framer-motion';
@@ -7,15 +7,30 @@ const PUBLIC_TOKEN = 'pk_Db8lXWjYSgmuij8XOmk7iw'; // Replace with your actual pu
 const DEFAULT_FLAG_URL = '/us-flag.svg';
 
 const StockModal = ({ stock, onClose }) => {
-  useEffect(() => {
-    // Any additional logic can be added here if needed
-  }, [stock]);
+  const [data, setData] = useState([]);
 
-  const data = Array.from({ length: 6 }, (_, i) => ({
-    month: `Month ${i + 1}`,
-    price: Math.floor(Math.random() * 100),
-    price_2: Math.floor(Math.random() * 100)
-  }));
+  useEffect(() => {
+    const fetchStockData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/stocks/${stock.symbol}/`);
+        if (response.ok) {
+          const result = await response.json();
+          setData(
+            result.map((item) => ({
+              date: item.date,
+              weight: parseFloat(item.weight),
+            }))
+          );
+        } else {
+          console.error('Failed to fetch stock data');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    if (stock) fetchStockData();
+  }, [stock]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={onClose}>
@@ -43,10 +58,13 @@ const StockModal = ({ stock, onClose }) => {
           <ResponsiveContainer>
             <LineChart data={data}>
               <CartesianGrid vertical={false} />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} />
+              <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} tickFormatter={(date) => {
+                const options = {month: 'short', year: 'numeric'}
+                return new Date(date).toLocaleDateString(undefined,options)
+              } } />
               <YAxis hide={true} />
               <Tooltip />
-              <Line type="monotone" dataKey="price" stroke="#000" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="weight" stroke="#f56565" strokeWidth={3} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
