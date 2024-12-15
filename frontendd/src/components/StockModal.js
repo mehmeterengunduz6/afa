@@ -73,8 +73,8 @@ const StockModal = ({ stock, onClose }) => {
               }} />
               <YAxis hide={true} type='number' domain={[dataMin => (dataMin*0.9), dataMax => (dataMax*1.1)]} />
               <Tooltip />
-              <Line type="monotone" dataKey="weight" data={isAfaTrueData} stroke="#f56565" strokeWidth={3} dot={false} />
-              <Line type="monotone" dataKey="weight" data={isAfaFalseData} stroke="#4A90E2" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="weight" data={isAfaTrueData} stroke="#e60073" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="weight" data={isAfaFalseData} stroke="#4c4fff" strokeWidth={3} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
