@@ -56,7 +56,7 @@ const StockModal = ({ stock, onClose }) => {
         </div>
         <div className="w-full h-80">
           <ResponsiveContainer>
-            <LineChart data={data}>
+            <LineChart data={data} margin={{top: 0,right: 40,left: 40,bottom: 0}}>
               <CartesianGrid vertical={false} />
               <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} tickFormatter={(date) => {
                 const options = { month: 'short', year: 'numeric' }
