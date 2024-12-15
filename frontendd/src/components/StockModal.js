@@ -8,6 +8,8 @@ const DEFAULT_FLAG_URL = '/us-flag.svg';
 
 const StockModal = ({ stock, onClose }) => {
   const [data, setData] = useState([]);
+  const [isAfaTrueData, setIsAfaTrueData] = useState([]);
+  const [isAfaFalseData, setIsAfaFalseData] = useState([]);
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -15,12 +17,19 @@ const StockModal = ({ stock, onClose }) => {
         const response = await fetch(`http://localhost:8000/stocks/${stock.symbol}/`);
         if (response.ok) {
           const result = await response.json();
-          setData(
-            result.map((item) => ({
-              date: item.date,
-              weight: parseFloat(item.weight),
-            }))
-          );
+          // Veriyi is_AFA'ya göre ayır
+          const trueData = result.filter((item) => item.is_AFA === true).map((item) => ({
+            date: item.date,
+            weight: parseFloat(item.weight),
+          }));
+          const falseData = result.filter((item) => item.is_AFA === false).map((item) => ({
+            date: item.date,
+            weight: parseFloat(item.weight),
+          }));
+
+
+          setIsAfaTrueData(trueData);
+          setIsAfaFalseData(falseData);
         } else {
           console.error('Failed to fetch stock data');
         }
@@ -56,15 +65,16 @@ const StockModal = ({ stock, onClose }) => {
         </div>
         <div className="w-full h-80">
           <ResponsiveContainer>
-            <LineChart data={data}>
+            <LineChart data={data} margin={{top: 0,right: 40,left: 40,bottom: 0}}>
               <CartesianGrid vertical={false} />
-              <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} tickFormatter={(date) => {
+              <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => {
                 const options = { month: 'short', year: 'numeric' }
                 return new Date(date).toLocaleDateString(undefined, options)
               }} />
               <YAxis hide={true} type='number' domain={[dataMin => (dataMin*0.9), dataMax => (dataMax*1.1)]} />
               <Tooltip />
-              <Line type="monotone" dataKey="weight" stroke="#f56565" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="weight" data={isAfaTrueData} stroke="#f56565" strokeWidth={3} dot={false} />
+              <Line type="monotone" dataKey="weight" data={isAfaFalseData} stroke="#4A90E2" strokeWidth={3} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>

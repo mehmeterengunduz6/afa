@@ -10,20 +10,19 @@ django.setup()
 
 from core.models import Stock  # Adjust this import based on your app's name
 
-def upload_json(file_path, date_value):
+def SP_upload_json(file_path, date_value):
     # Open the JSON file
     with open(file_path) as f:
         data = json.load(f)
 
     # Process each record and save to database
     for item in data:
-        weight = item['weight'].replace(',', '.')  # Adjust for comma separated weight
         stock = Stock(
             symbol=item['symbol'],
             name=item['name'],
-            weight=Decimal(weight),  # Convert weight to Decimal
-            date=date_value,  # Use the date passed as input
-            is_Afa=True
+            weight=round(Decimal(item['weight']) * 100, 2),  # Convert weight to Decimal
+            date=date_value, # Use the date passed as input
+            is_AFA=False
         )
         stock.save()
 
@@ -32,12 +31,12 @@ def upload_json(file_path, date_value):
 if __name__ == "__main__":
     # Get file path and date from the command line arguments
     if len(sys.argv) != 3:
-        print("Usage: python upload_json.py <file_path> <date>")
+        print("Usage: python SP_upload_json.py <file_path> <date>")
         sys.exit(1)
 
     file_path = sys.argv[1]  # First argument is the file path
     date_value = sys.argv[2]  # Second argument is the date (e.g., '2024-09-01')
 
-    upload_json(file_path, date_value)
-
-# python upload_json.py /path/to/your/json_file.json 2024-09-01
+    SP_upload_json(file_path, date_value)
+    
+# python SP_upload_json.py /path/to/your/json_file.json 2024-09-01
