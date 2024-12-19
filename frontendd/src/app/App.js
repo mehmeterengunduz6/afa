@@ -33,12 +33,12 @@ function Home() {
   }
 
   const dummyData = [
-    { date: '2024-06-01', spPrice: 550, afaPrice: 0.40 },
-    { date: '2024-07-01', spPrice: 545, afaPrice: 0.50 },
-    { date: '2024-08-01', spPrice: 350, afaPrice: 0.55 },
-    { date: '2024-09-01', spPrice: 600, afaPrice: 0.45 },
-    { date: '2024-10-01', spPrice: 550, afaPrice: 0.50 },
-    { date: '2024-11-01', spPrice: 700, afaPrice: 0.65 },
+    { date: '2024-07-01', spPrice: 545.34, afaPrice: 0.019 },
+    { date: '2024-08-01', spPrice: 543.01, afaPrice: 0.019 },
+    { date: '2024-09-01', spPrice: 552.08, afaPrice: 0.0189 },
+    { date: '2024-10-01', spPrice: 568.62, afaPrice: 0.0192 },
+    { date: '2024-11-01', spPrice: 571.04, afaPrice: 0.0193 },
+    { date: '2024-12-01', spPrice: 603.63, afaPrice: 0.02 }
   ]
 
   return (
@@ -52,7 +52,7 @@ function Home() {
         <ResponsiveContainer>
           <LineChart data={dummyData} margin={{ top: 8, right: 40, left: 40, bottom: 0 }}>
             <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => { const options = { month: 'short', year: 'numeric' }; return new Date(date).toLocaleDateString(undefined, options); }} />
-            <YAxis yAxisId='afa' hide={true} orientation='left' type='number' domain={[0.25,0.75]} />
+            <YAxis yAxisId='afa' hide={true} orientation='left' type='number' domain={[0.01,0.025]} />
             <YAxis yAxisId='sp' hide={true} orientation='right' type='number' domain={[250,750]} />
             <Tooltip />
             <Line yAxisId='afa' type='monotone' dataKey='afaPrice' stroke='#e60073' strokeWidth={3} dot={false} />
