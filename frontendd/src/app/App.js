@@ -33,7 +33,11 @@ function Home() {
 
   return (
     <main className="container mx-auto py-10 bg-white">
-      <h1 className="text-4xl font-bold mb-8 text-center text-red-600">Ak Portföy Yabancı Hisse Senedi Fonu (AFA)</h1>
+      <div className='flex justify-center space-x-2 mb-8'>
+        <h1 className='text-3xl font-bold text-red-600'>AFA</h1>
+        <h1 className='text-3xl font-bold text-gray-900'>vs</h1>
+        <h1 className='text-3xl font-bold text-blue-600'>S&P 500</h1>
+      </div>
       <StockTable year={parsedYear} month={parsedMonth} />
     </main>
   );
