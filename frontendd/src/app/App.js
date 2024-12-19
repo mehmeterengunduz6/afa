@@ -31,9 +31,10 @@ function Home() {
     return <div className="text-center mt-8 text-red-500">Invalid year or month</div>;
   }
 
+ 
+
   return (
-    <main className="container mx-auto py-10 bg-white">
-      <h1 className="text-4xl font-bold mb-8 text-center text-red-600">Ak Portföy Yabancı Hisse Senedi Fonu (AFA)</h1>
+    <main className="container mx-auto py-8 bg-white">
       <StockTable year={parsedYear} month={parsedMonth} />
     </main>
   );
