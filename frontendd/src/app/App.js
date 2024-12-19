@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { StockTable } from '../components/StockTable.js'
 import { Routes, Route, useParams, Navigate } from 'react-router-dom';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 export default function App() {
   return (
@@ -31,12 +32,33 @@ function Home() {
     return <div className="text-center mt-8 text-red-500">Invalid year or month</div>;
   }
 
+  const dummyData = [
+    { date: '2024-06-01', spPrice: 550, afaPrice: 0.40 },
+    { date: '2024-07-01', spPrice: 545, afaPrice: 0.50 },
+    { date: '2024-08-01', spPrice: 350, afaPrice: 0.55 },
+    { date: '2024-09-01', spPrice: 600, afaPrice: 0.45 },
+    { date: '2024-10-01', spPrice: 550, afaPrice: 0.50 },
+    { date: '2024-11-01', spPrice: 700, afaPrice: 0.65 },
+  ]
+
   return (
-    <main className="container mx-auto py-10 bg-white">
-      <div className='flex justify-center space-x-2 mb-8'>
+    <main className="container mx-auto py-8 bg-white">
+      <div className='flex justify-center space-x-2 mb-4'>
         <h1 className='text-3xl font-bold text-red-600'>AFA</h1>
         <h1 className='text-3xl font-bold text-gray-900'>vs</h1>
         <h1 className='text-3xl font-bold text-blue-600'>S&P 500</h1>
+      </div>
+      <div className='max-w-2xl h-80 mx-auto flex items-center justify-center'>
+        <ResponsiveContainer>
+          <LineChart data={dummyData} margin={{ top: 8, right: 40, left: 40, bottom: 0 }}>
+            <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => { const options = { month: 'short', year: 'numeric' }; return new Date(date).toLocaleDateString(undefined, options); }} />
+            <YAxis yAxisId='afa' hide={true} orientation='left' type='number' domain={[0.25,0.75]} />
+            <YAxis yAxisId='sp' hide={true} orientation='right' type='number' domain={[250,750]} />
+            <Tooltip />
+            <Line yAxisId='afa' type='monotone' dataKey='afaPrice' stroke='#e60073' strokeWidth={3} dot={false} />
+            <Line yAxisId='sp' type='monotone' dataKey='spPrice' stroke='#4c4fff' strokeWidth={3} dot={false} />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
       <StockTable year={parsedYear} month={parsedMonth} />
     </main>

@@ -73,7 +73,7 @@ export function StockTable({ year, month }) {
   return (
     <div className="min-h-screen bg-white py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-red-600 mb-8">Stocks for {year}-{month}</h1>
+        <h1 className="text-xl font-bold text-gray-900 mb-8">AFA Portföy Dağılımı: {year}-{month}</h1>
         <div className="space-y-4">
           {currentStocks.map((stock, index) => (
             <motion.div
