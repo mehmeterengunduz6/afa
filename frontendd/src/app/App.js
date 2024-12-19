@@ -75,16 +75,16 @@ function Home() {
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className='flex justify-center gap-2'>
-        <Card className='p-3 text-center w-36'>
+      <div className='flex justify-center gap-8'>
+        <Card className='p-3 text-center'>
           <h1 className='text-sm font-bold'>
             6 month
           </h1>
           <p className='text-sm'>
-            AFA: %35
+            AFA: %12
           </p>
           <p className='text-sm'>
-            S&P 500: %45
+            S&P 500: %7.71
           </p>
         </Card>
         <Card className='p-3 text-center w-36'>
@@ -92,40 +92,30 @@ function Home() {
             1 year
           </h1>
           <p className='text-sm'>
-            AFA: %35
+            AFA: %27.65
           </p>
           <p className='text-sm'>
-            S&P 500: %45
+            S&P 500: %24.04
           </p>
         </Card><Card className='p-3 text-center w-36'>
           <h1 className='text-sm font-bold'>
             3 year
           </h1>
           <p className='text-sm'>
-            AFA: %35
+            AFA: %23.55
           </p>
           <p className='text-sm'>
-            S&P 500: %45
+            S&P 500: %42.5
           </p>
         </Card><Card className='p-3 text-center w-36'>
           <h1 className='text-sm font-bold'>
             5 year
           </h1>
           <p className='text-sm'>
-            AFA: %35
+            AFA: %75.32
           </p>
           <p className='text-sm'>
-            S&P 500: %45
-          </p>
-        </Card><Card className='p-3 text-center w-36'>
-          <h1 className='text-sm font-bold'>
-            10 year
-          </h1>
-          <p className='text-sm'>
-            AFA: %35
-          </p>
-          <p className='text-sm'>
-            S&P 500: %45
+            S&P 500: %82.44
           </p>
         </Card>
       </div>

@@ -73,7 +73,10 @@ export function StockTable({ year, month }) {
   return (
     <div className="min-h-screen bg-white py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-xl font-bold text-gray-900 mb-8">AFA Portföy Dağılımı: {year}-{month}</h1>
+        <div className='flex items-baseline space-x-1 text-center mb-8'>
+          <h1 className="text-xl font-bold text-gray-900">AFA Portföy Dağılımı: {year}-{month}</h1>
+          <h1 className='text-sm font-semibold text-gray-400'>(Last Updated: 05/12/2024)</h1>
+        </div>
         <div className="space-y-4">
           {currentStocks.map((stock, index) => (
             <motion.div
@@ -91,9 +94,9 @@ export function StockTable({ year, month }) {
                 </div>
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center space-x-4">
-                    <img 
-                      src={`https://img.logo.dev/ticker/${stock.symbol.toLowerCase()}?token=${PUBLIC_TOKEN}`} 
-                      alt={`${stock.name} logo`} 
+                    <img
+                      src={`https://img.logo.dev/ticker/${stock.symbol.toLowerCase()}?token=${PUBLIC_TOKEN}`}
+                      alt={`${stock.name} logo`}
                       className="w-10 h-10 rounded-full"
                       onError={(e) => { e.target.onerror = null; e.target.src = DEFAULT_FLAG_URL; }}
                     />
