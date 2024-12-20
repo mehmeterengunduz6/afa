@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 class StockPriceView(View):
     def get(self, request):
-        stock_price = StockPrice.objectss.all().order_by('date')
+        stock_price = StockPrice.objects.all().order_by('date')
     
         stock_price_data = StockPriceSerializer(stock_price, many=True).data
         
