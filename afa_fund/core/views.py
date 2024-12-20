@@ -1,9 +1,18 @@
 from rest_framework import viewsets
 from django.views import View
-from .models import Stock
-from .serializer import StockSerializer
+from .models import Stock, StockPrice
+from .serializer import StockSerializer, StockPriceSerializer
 from django.http import JsonResponse
 # Create your views here.
+
+class StockPriceView(View):
+    def get(self, request):
+        stock_price = StockPrice.objectss.all().order_by('date')
+    
+        stock_price_data = StockPriceSerializer(stock_price, many=True).data
+        
+        return JsonResponse(stock_price_data, safe=False)
+    
 
 class StockViewSet(viewsets.ModelViewSet):
     queryset = Stock.objects.all().order_by('-weight')

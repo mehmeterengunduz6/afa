@@ -12,3 +12,8 @@ class Stock(models.Model):
 
     def __str__(self):
         return self.symbol
+    
+class StockPrice(models.Model):
+    date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    afaPrice = models.DecimalField(max_digits=6, decimal_places=4)
+    spPrice = models.DecimalField(max_digits=6, decimal_places=2)

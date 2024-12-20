@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react'
 import { StockTable } from '../components/StockTable.js'
 import { Routes, Route, useParams, Navigate } from 'react-router-dom';
+import Header from '../components/ui/Header'
+import PriceCard from '../components/ui/PriceCard'
+import MainLineChart from '../components/ui/MainLineChart'
 
 export default function App() {
   return (
@@ -31,11 +34,18 @@ function Home() {
     return <div className="text-center mt-8 text-red-500">Invalid year or month</div>;
   }
 
- 
+
 
   return (
     <main className="container mx-auto py-8 bg-white">
-      <StockTable year={parsedYear} month={parsedMonth} />
+      <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <Header />
+          <MainLineChart />
+          <PriceCard />
+          <StockTable year={parsedYear} month={parsedMonth} />
+        </div>
+      </div>
     </main>
   );
 }
