@@ -8,7 +8,7 @@ function MainLineChart() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(`http://localhost:8000/price/`)
+                const response = await fetch(`https://erengunduzzz.pythonanywhere.com/price/`)
                 if (!response.ok) {
                     throw new Error('HTTP error. Status ${respnse.status}')
                 }

@@ -14,7 +14,7 @@ const StockModal = ({ stock, onClose }) => {
   useEffect(() => {
     const fetchStockData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/stocks/${stock.symbol}/`);
+        const response = await fetch(`https://erengunduzzz.pythonanywhere.com/stocks/${stock.symbol}/`);
         if (response.ok) {
           const result = await response.json();
           // Veriyi is_AFA'ya göre ayır
