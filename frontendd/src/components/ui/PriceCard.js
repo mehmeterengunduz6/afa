@@ -3,7 +3,7 @@ import { Card } from './card.js'
 
 function PriceCard() {
   return (
-    <div className='grid grid-cols-4 justify-center gap-2 mb-4'>
+    <div className='grid grid-cols-2 md:grid-cols-4 justify-center gap-2 mb-4'>
       <Card className='p-3 text-center'>
         <h1 className='text-sm font-bold'>
           6 month
