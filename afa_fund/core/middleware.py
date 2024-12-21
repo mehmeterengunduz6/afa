@@ -1,5 +1,4 @@
 from django.shortcuts import redirect
-from .models import Stock
 
 class RedirectIfNoDataMiddleware:
     def __init__(self, get_response):
@@ -8,13 +7,9 @@ class RedirectIfNoDataMiddleware:
     def __call__(self, request):
         print(f"Request path: {request.path}")  # Debugging line
         
-        # Redirect root path to /2024/11
+        # Allow only the root path
         if request.path == '/':
-            return redirect('http://localhost:3000/2024/11/')
-        
-        # Allow requests to /2024/11 and /2024/10 to proceed
-        if request.path in ['/2024/11/', '/2024/10/']:
             return self.get_response(request)
-
-        # Redirect all other requests to /2024/11
-        return redirect('http://localhost:3000/2024/11/')
+        
+        # Redirect all other requests to the root path
+        return redirect('/')

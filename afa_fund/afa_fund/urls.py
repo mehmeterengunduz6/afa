@@ -24,8 +24,8 @@ router.register(r'stocks', StockViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('<int:year>/<int:month>/', MonthlyStockView.as_view(), name='monthly_stocks'),
+    path('api/', include(router.urls)), 
     path('stocks/<str:symbol>/', StockDetailView.as_view(), name= 'stock_detail'),
-    path('price/', StockPriceView.as_view(), name='stock_price')
+    path('price/', StockPriceView.as_view(), name='stock_price'),
+    path('<int:year>/<int:month>/', MonthlyStockView.as_view(), name='monthly_stocks'),
 ]
