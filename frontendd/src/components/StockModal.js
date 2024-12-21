@@ -67,7 +67,7 @@ const StockModal = ({ stock, onClose }) => {
           <ResponsiveContainer>
             <LineChart data={data} margin={{top: 0,right: 40,left: 40,bottom: 0}}>
               <CartesianGrid vertical={false} />
-              <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => {
+              <XAxis dataKey="date" hide={true} tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => {
                 const options = { month: 'short', year: 'numeric' }
                 return new Date(date).toLocaleDateString(undefined, options)
               }} />
