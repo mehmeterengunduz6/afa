@@ -23,7 +23,7 @@ def upload_json(file_path, date_value):
             name=item['name'],
             weight=Decimal(weight),  # Convert weight to Decimal
             date=date_value,  # Use the date passed as input
-            is_Afa=True
+            is_AFA=True
         )
         stock.save()
 

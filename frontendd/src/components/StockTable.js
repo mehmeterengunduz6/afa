@@ -82,7 +82,7 @@ export function StockTable({ year, month }) {
       <div>
         <div className='flex items-baseline space-x-1 text-center mb-8'>
           <h1 className="text-xl font-bold text-gray-900">AFA Portföy Dağılımı: {year}-{month}</h1>
-          <h1 className='text-sm font-semibold text-gray-400'>(Last Updated: 05/12/2024)</h1>
+          <h1 className='text-sm font-semibold text-gray-400'>(Last Updated: 07/01/2025)</h1>
         </div>
         <div className="flex flex-wrap -m-2">
           {currentStocks.map((stock, index) => {
