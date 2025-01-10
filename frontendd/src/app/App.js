@@ -33,6 +33,7 @@ function Home() {
       <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <Header />
+          <h1 className='text-xl font-bold'>2023 Ekimden beri Getiri:</h1>
           <MainLineChart />
           <PriceCard />
           <StockTable year={year} month={month} />

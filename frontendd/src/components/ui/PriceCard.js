@@ -1,53 +1,77 @@
-import React from "react";
-import { Card } from './card.js'
+import React, { useEffect, useState } from "react";
+import { Card } from './card.js';
 
 function PriceCard() {
+  const [priceData, setPriceData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPriceData = async () => {
+      try {
+        const response = await fetch('https://erengunduzzz.pythonanywhere.com/price/');
+        if (!response.ok) {
+          throw new Error('Failed to fetch price data');
+        }
+        const data = await response.json();
+        calculatePercentageChanges(data);
+      } catch (error) {
+        console.error('Error fetching price data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const calculatePercentageChanges = (data) => {
+      const latestPrice = data[data.length - 1]; // Assuming the last entry is the latest
+      const calculatedData = {};
+
+      const monthsAgo = [1, 3, 6, 12]; // 1 month, 3 months, 6 months, 1 year
+      monthsAgo.forEach(month => {
+        const targetDate = new Date(latestPrice.date);
+        targetDate.setMonth(targetDate.getMonth() - month);
+        const targetPrice = data.find(item => new Date(item.date).getTime() === targetDate.getTime());
+
+        if (targetPrice) {
+          const percentageChangeAFA = ((latestPrice.afaPrice - targetPrice.afaPrice) / targetPrice.afaPrice) * 100;
+          const percentageChangeSP500 = ((latestPrice.spPrice - targetPrice.spPrice) / targetPrice.spPrice) * 100;
+
+          calculatedData[`${month}_month`] = {
+            AFA: percentageChangeAFA.toFixed(2),
+            SP500: percentageChangeSP500.toFixed(2),
+          };
+        }
+      });
+
+      setPriceData(calculatedData);
+    };
+
+    fetchPriceData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className='grid grid-cols-2 md:grid-cols-4 justify-center gap-2 mb-4'>
-      <Card className='p-3 text-center'>
-        <h1 className='text-sm font-bold'>
-          6 month
-        </h1>
-        <p className='text-sm'>
-          AFA: %12
-        </p>
-        <p className='text-sm'>
-          S&P 500: %7.71
-        </p>
-      </Card>
-      <Card className='p-3 text-center'>
-        <h1 className='text-sm font-bold'>
-          1 year
-        </h1>
-        <p className='text-sm'>
-          AFA: %27.65
-        </p>
-        <p className='text-sm'>
-          S&P 500: %24.04
-        </p>
-      </Card><Card className='p-3 text-center'>
-        <h1 className='text-sm font-bold'>
-          3 year
-        </h1>
-        <p className='text-sm'>
-          AFA: %23.55
-        </p>
-        <p className='text-sm'>
-          S&P 500: %42.5
-        </p>
-      </Card><Card className='p-3 text-center'>
-        <h1 className='text-sm font-bold'>
-          5 year
-        </h1>
-        <p className='text-sm'>
-          AFA: %75.32
-        </p>
-        <p className='text-sm'>
-          S&P 500: %82.44
-        </p>
-      </Card>
+      {Object.keys(priceData).map((key) => {
+        const { AFA, SP500 } = priceData[key];
+        return (
+          <Card className='p-3 text-center' key={key}>
+            <h1 className='text-sm font-bold'>
+              {key.replace('_month', ' month')}
+            </h1>
+            <p className='text-sm'>
+              AFA: {AFA}%
+            </p>
+            <p className='text-sm'>
+              S&P 500: {SP500}%
+            </p>
+          </Card>
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default PriceCard
+export default PriceCard;
