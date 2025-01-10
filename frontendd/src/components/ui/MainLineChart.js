@@ -10,7 +10,7 @@ function MainLineChart() {
             try {
                 const response = await fetch(`https://erengunduzzz.pythonanywhere.com/price/`)
                 if (!response.ok) {
-                    throw new Error('HTTP error. Status ${respnse.status}')
+                    throw new Error('HTTP error. Status ${response.status}')
                 }
                 const jsonData = await response.json()
                 const percData = jsonData.map((item, index) => {
@@ -40,6 +40,22 @@ function MainLineChart() {
         return <div>Loading...</div>;
     }
 
+    const CustomTooltip = ({ active, payload }) => {
+        if (active && payload && payload.length) {
+            const date = new Date(payload[0].payload.date);
+            const options = { month: 'long', year: 'numeric' };
+            const formattedDate = date.toLocaleDateString('tr-TR', options);
+            return (
+                <div className="tooltip p-2 border rounded bg-white shadow-lg">
+                    <p style={{ fontWeight: 'bold' }}>{formattedDate}</p>
+                    <p style={{ color: '#e60073' }}>Afa Getiri: {payload[0].payload.afaPrice}%</p>
+                    <p style={{ color: '#4c4fff' }}>S&P Getiri: {payload[0].payload.spPrice}%</p>
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
         <div className='max-w-4xl h-80 mx-auto flex items-center justify-center mb-4'>
             <ResponsiveContainer>
@@ -47,7 +63,7 @@ function MainLineChart() {
                     <XAxis dataKey="date" hide={true} tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => { const options = { month: 'short', year: 'numeric' }; return new Date(date).toLocaleDateString(undefined, options); }} />
                     <YAxis yAxisId='afa' hide={true} orientation='left' type='number' domain={[-10, 50]} />
                     <YAxis yAxisId='sp' hide={true} orientation='right' type='number' domain={[-10, 50]} />
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                     <Line yAxisId='afa' type='monotone' dataKey='afaPrice' stroke='#e60073' strokeWidth={3} dot={false} />
                     <Line yAxisId='sp' type='monotone' dataKey='spPrice' stroke='#4c4fff' strokeWidth={3} dot={false} />
                 </LineChart>
