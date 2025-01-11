@@ -6,13 +6,24 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '../components/ui/Header'
 import PriceCard from '../components/ui/PriceCard'
 import MainLineChart from '../components/ui/MainLineChart'
+import { ThemeProvider } from '../themeProvider.js';
+import { useTheme } from 'next-themes';
+import { ModeToggle } from '../components/ModeToggle.js';
 
 export default function App() {
   return (
+    <ThemeProvider
+      attribute='class'
+      defaultTheme='light'
+      enableSystem
+      disableTransitionOnChange
+    >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+    </ThemeProvider>
+
   )
 }
 
@@ -22,6 +33,7 @@ function Home() {
   const [oldestDate, setOldestDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const fetchPriceData = async () => {
@@ -31,11 +43,11 @@ function Home() {
           throw new Error('Failed to fetch price data');
         }
         const data = await response.json();
-        
+
         if (data.length > 0) {
           const dates = data.map(item => new Date(item.date));
           const oldest = new Date(Math.min(...dates));
-          const options = {month: 'long', year: 'numeric'};
+          const options = { month: 'long', year: 'numeric' };
           setOldestDate(oldest.toLocaleDateString('tr-TR', options));
         } else {
           setOldestDate('No data available');
@@ -50,7 +62,11 @@ function Home() {
     fetchPriceData();
   }, []);
 
-  if(loading) {
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  if (loading) {
     return <div>Loading...</div>
   }
 
@@ -59,7 +75,10 @@ function Home() {
       <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <Header />
-          <h1 className='text-xl font-bold'>{oldestDate}'ten beri Getiri:</h1>
+          <div className='flex justify-between items-center mb-4'>
+            <h1 className='text-xl font-bold'>{oldestDate}'ten beri Getiri:</h1>
+            <ModeToggle />
+          </div>
           <MainLineChart />
           <PriceCard />
           <StockTable year={year} month={month} />

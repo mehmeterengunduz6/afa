@@ -87,8 +87,8 @@ export function StockTable({ year, month }) {
     <div>
       <div>
         <div className='flex items-baseline space-x-1 text-center mb-8'>
-          <h1 className="text-xl font-bold text-gray-900">AFA Portföy Dağılımı: {formatDate(year, month)}</h1>
-          <h1 className='text-sm font-semibold text-gray-400'>(Last Updated: 07/01/2025)</h1>
+          <h1 className="text-xl font-bold text-gray-900 text-afa">AFA Portföy Dağılımı: {formatDate(year, month)}</h1>
+          <h1 className='text-sm font-semibold text-gray-400 text-update'>(Last Updated: 07/01/2025)</h1>
         </div>
         <div className="flex flex-wrap -m-2">
           {currentStocks.map((stock, index) => {
@@ -105,10 +105,10 @@ export function StockTable({ year, month }) {
                 onClick={(e) => handleCardClick(stock, e.currentTarget)}
                 className='w-full sm:w-1/2 px-2 mb-4'
               >
-                <Card className="p-6 flex items-center cursor-pointer">
+                <Card className="p-6 flex items-center cursor-pointer card-stock">
                   <div className="mr-4">
                     <Card className="w-10 h-10 flex items-center justify-center bg-white rounded-full">
-                      <span className="text-lg font-semibold text-black">{index + 1}</span>
+                      <span className="text-lg font-semibold text-black text-number">{index + 1}</span>
                     </Card>
                   </div>
                   <div className="flex items-center justify-between w-full">
@@ -128,7 +128,7 @@ export function StockTable({ year, month }) {
                       <div className={`inline-flex items-center text-xs font-medium ${changeColor} p-1 rounded-md`}>
                         <span>%{change.toFixed(2)}</span>
                       </div>
-                      <p className="text-lg font-semibold text-gray-900 mt-1">%{stock.weight.toFixed(2)}</p>
+                      <p className="text-lg font-semibold text-gray-900 mt-1 text-number">%{stock.weight.toFixed(2)}</p>
                     </div>
                   </div>
                 </Card>
