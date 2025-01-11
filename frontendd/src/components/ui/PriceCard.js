@@ -57,14 +57,14 @@ function PriceCard() {
       {Object.keys(priceData).map((key) => {
         const { AFA, SP500 } = priceData[key];
         return (
-          <Card className='p-3 text-center' key={key}>
-            <h1 className='text-sm font-bold'>
+          <Card className='p-3 text-center price-card' key={key}>
+            <h1 className='text-sm font-bold card-title'>
               {key.replace('_month', ' month')}
             </h1>
-            <p className='text-sm'>
+            <p className='text-sm card-afa-text'>
               AFA: {AFA}%
             </p>
-            <p className='text-sm'>
+            <p className='text-sm card-sp500-text'>
               S&P 500: {SP500}%
             </p>
           </Card>
