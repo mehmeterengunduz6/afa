@@ -77,11 +77,17 @@ export function StockTable({ year, month }) {
     setCardPosition(null);
   };
 
+  const formatDate = () => {
+    const date = new Date(year, month - 1);
+    const options = {month: 'long', year: 'numeric'};
+    return date.toLocaleDateString('tr-TR', options);
+  }
+
   return (
     <div>
       <div>
         <div className='flex items-baseline space-x-1 text-center mb-8'>
-          <h1 className="text-xl font-bold text-gray-900">AFA Portföy Dağılımı: {year}-{month}</h1>
+          <h1 className="text-xl font-bold text-gray-900">AFA Portföy Dağılımı: {formatDate(year, month)}</h1>
           <h1 className='text-sm font-semibold text-gray-400'>(Last Updated: 07/01/2025)</h1>
         </div>
         <div className="flex flex-wrap -m-2">
