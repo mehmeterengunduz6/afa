@@ -70,10 +70,6 @@ html.dark .min-h-screen {
   background-color: #000;
 }
 
-html.light .price-card {
-  border-color: lightgray;
-}
-
 html.dark .price-card {
   border-color: #374151;
 }
@@ -129,12 +125,8 @@ html.dark .header-title {
 
 /* StockTable Component */
 
-html.light .text-afa {
-  color: darkgray;
-}
-
 html.dark .text-afa {
-  color: lightgray
+  color: #f9fafb
 }
 
 html.dark .text-number {
@@ -145,7 +137,6 @@ html.dark .card-stock {
   border-color: #374151;
 }
 
-
 /* index.css (or your global CSS file) */
 .vs-text {
   color: #222;
@@ -155,4 +146,8 @@ html.dark .card-stock {
 html.dark .vs-text {
   color: #eee;
   /* Dark mode color */
+}
+
+html.dark .mode-button {
+  border-color: #374151;
 }
