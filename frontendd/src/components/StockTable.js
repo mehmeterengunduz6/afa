@@ -107,7 +107,7 @@ export function StockTable({ year, month }) {
               >
                 <Card className="p-6 flex items-center cursor-pointer card-stock">
                   <div className="mr-4">
-                    <Card className="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                    <Card className="w-10 h-10 flex items-center justify-center bg-white rounded-full border-number">
                       <span className="text-lg font-semibold text-black text-number">{index + 1}</span>
                     </Card>
                   </div>

@@ -160,5 +160,8 @@ html.dark .ribbon-r {
 html.dark .ribbon-g {
   background-color: #16a34a;
   color: white;
+}
 
+html.dark .border-number {
+  border-color: #374151;
 }
