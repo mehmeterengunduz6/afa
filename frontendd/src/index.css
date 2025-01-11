@@ -151,3 +151,14 @@ html.dark .vs-text {
 html.dark .mode-button {
   border-color: #374151;
 }
+
+html.dark .ribbon-r {
+  color: white;
+  background-color: #dc2626;
+}
+
+html.dark .ribbon-g {
+  background-color: #16a34a;
+  color: white;
+
+}

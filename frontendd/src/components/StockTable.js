@@ -63,7 +63,7 @@ export function StockTable({ year, month }) {
   }
 
   const getWeightChangeColor = (change) => {
-    return change > 0 ? 'text-green-500 bg-green-100' : 'text-red-500 bg-red-100'
+    return change > 0 ? 'text-green-500 bg-green-100 ribbon-g' : 'text-red-500 bg-red-100 ribbon-r'
   }
 
   const handleCardClick = (stock, cardElement) => {
