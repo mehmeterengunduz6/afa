@@ -17,16 +17,26 @@ const StockModal = ({ stock, onClose }) => {
         const response = await fetch(`https://erengunduzzz.pythonanywhere.com/stocks/${stock.symbol}/`);
         if (response.ok) {
           const result = await response.json();
-          // Veriyi is_AFA'ya göre ayır
-          const trueData = result.filter((item) => item.is_AFA === true).map((item) => ({
-            date: item.date,
-            weight: parseFloat(item.weight),
-          }));
-          const falseData = result.filter((item) => item.is_AFA === false).map((item) => ({
-            date: item.date,
-            weight: parseFloat(item.weight),
-          }));
+          
+          // Get all unique dates
+          const allDates = [...new Set(result.map(item => item.date))].sort();
+          
+          // Process data for AFA true and false
+          const trueData = allDates.map(date => {
+            const matchingItem = result.find(item => item.date === date && item.is_AFA === true);
+            return {
+              date: date,
+              weight: matchingItem ? parseFloat(matchingItem.weight) : 0
+            };
+          });
 
+          const falseData = allDates.map(date => {
+            const matchingItem = result.find(item => item.date === date && item.is_AFA === false);
+            return {
+              date: date,
+              weight: matchingItem ? parseFloat(matchingItem.weight) : 0
+            };
+          });
 
           setIsAfaTrueData(trueData);
           setIsAfaFalseData(falseData);
@@ -65,13 +75,17 @@ const StockModal = ({ stock, onClose }) => {
         </div>
         <div className="w-full h-80">
           <ResponsiveContainer>
-            <LineChart data={data} margin={{top: 0,right: 40,left: 40,bottom: 0}}>
+            <LineChart data={data} margin={{top: 0,right: 40,left: 40,bottom: 20}}>
               <CartesianGrid vertical={false} />
               <XAxis dataKey="date" hide={true} tickLine={false} axisLine={false} tickMargin={8} interval={0} allowDuplicatedCategory={false} tickFormatter={(date) => {
                 const options = { month: 'short', year: 'numeric' }
                 return new Date(date).toLocaleDateString(undefined, options)
               }} />
-              <YAxis hide={true} type='number' domain={[dataMin => (dataMin*0.9), dataMax => (dataMax*1.1)]} />
+              <YAxis 
+                hide={true} 
+                type='number' 
+                domain={[0, dataMax => Math.max(dataMax * 1.1, 0.1)]} 
+              />
               <Tooltip />
               <Line type="monotone" dataKey="weight" data={isAfaTrueData} stroke="#e60073" strokeWidth={3} dot={false} />
               <Line type="monotone" dataKey="weight" data={isAfaFalseData} stroke="#4c4fff" strokeWidth={3} dot={false} />

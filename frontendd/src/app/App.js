@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { StockTable } from '../components/StockTable.js'
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Header from '../components/ui/Header'
+import Header from '../components/ui/Header.js';
 import PriceCard from '../components/ui/PriceCard'
 import MainLineChart from '../components/ui/MainLineChart'
 import { ThemeProvider } from '../themeProvider.js';
