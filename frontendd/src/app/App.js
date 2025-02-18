@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { StockTable } from '../components/StockTable.js'
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Header from '../components/ui/Header'
+import Header from '../components/ui/Header.js';
 import PriceCard from '../components/ui/PriceCard'
 import MainLineChart from '../components/ui/MainLineChart'
 import { ThemeProvider } from '../themeProvider.js';
@@ -28,8 +28,8 @@ export default function App() {
 }
 
 function Home() {
-  const year = 2024;
-  const month = 12;
+  const year = 2025;
+  const month = 1;
   const [oldestDate, setOldestDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
