@@ -47,8 +47,8 @@ function MainLineChart() {
             const formattedDate = date.toLocaleDateString('tr-TR', options);
             return (
                 <div className="tooltip p-2 border rounded bg-white shadow-lg">
-                    <p style={{ fontWeight: 'bold' }}>{formattedDate}</p>
-                    <p style={{ color: '#e60073' }}>Afa Getiri: {payload[0].payload.afaPrice}%</p>
+                    <p style={{ fontWeight: 'bold' }}>{formattedDate} ($)</p>
+                    <p style={{ color: '#e60073' }}>AFA Getiri: {payload[0].payload.afaPrice}%</p>
                     <p style={{ color: '#4c4fff' }}>S&P Getiri: {payload[0].payload.spPrice}%</p>
                 </div>
             );

@@ -26,7 +26,7 @@ export function StockTable({ year, month }) {
           window.location.href = response.url;
         } else {
           const data = await response.json();
-          const filteredData = data.filter(stock => stock.is_AFA === true);
+          const filteredData = data.filter(stock => stock.is_AFA === true && stock.weight !== 0);
           setCurrentStocks(filteredData);
         }
       } catch (error) {

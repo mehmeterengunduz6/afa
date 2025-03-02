@@ -59,7 +59,7 @@ function PriceCard() {
         return (
           <Card className='p-3 text-center price-card' key={key}>
             <h1 className='text-sm font-bold card-title'>
-              {key.replace('_month', ' month')}
+              {key.replace('_month', ' ay')}
             </h1>
             <p className='text-sm card-afa-text'>
               AFA: {AFA}%
