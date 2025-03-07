@@ -29,7 +29,7 @@ export default function App() {
 
 function Home() {
   const year = 2025;
-  const month = 1;
+  const month = 2;
   const [oldestDate, setOldestDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
